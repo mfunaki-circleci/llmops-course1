@@ -135,7 +135,7 @@ def get_gh_api_key():
     return github_token
 
 def get_repo_name():
-    return "CircleCI-Learning/llmops-course"
+    return "mfunaki-circleci/llmops-course1"
 
 
 def _create_tree_element(repo, path, content):
