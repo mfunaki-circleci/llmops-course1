@@ -5,9 +5,11 @@ from langchain_google_vertexai        import ChatVertexAI
 from langchain_core.output_parsers    import StrOutputParser
 
 import os
-
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
+
+import google.auth
+credentials, project_id = google.auth.default()
 
 def eval_expected_words(
     system_message,
