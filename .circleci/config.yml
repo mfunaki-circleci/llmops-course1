@@ -63,7 +63,9 @@ jobs:
           # app-dir: ~/project/package-directory/  # If your requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
-          command: echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
+          command: |
+            mkdir -p ~/.config/gcloud
+            echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
       - gcp-cli/setup
       - run:
           name: Run assistant evals.
@@ -80,7 +82,9 @@ jobs:
           # app-dir: ~/project/package-directory/  # If your requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
-          command: echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
+          command: |
+            mkdir -p ~/.config/gcloud
+            echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
       - gcp-cli/setup
       - run:
           name: Run release evals.
@@ -97,7 +101,9 @@ jobs:
           # app-dir: ~/project/package-directory/  # If your requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
-          command: echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
+          command: |
+            mkdir -p ~/.config/gcloud
+            echo $GCP_ADC | base64 --decode > ~/.config/gcloud/application_default_credentials.json
       - gcp-cli/setup
       - run:
           name: Run end to end evals.
