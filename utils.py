@@ -124,6 +124,11 @@ def get_openai_api_key():
     openai_api_key = os.getenv("OPENAI_API_KEY")
     return openai_api_key
 
+def get_google_api_key():
+    load_env()
+    google_api_key = os.getenv("GOOGLE_API_KEY")
+    return google_api_key
+
 def get_circle_api_key():
     load_env()
     circle_token = os.getenv("CIRCLE_TOKEN")
