@@ -1,8 +1,8 @@
 from app import assistant_chain
 from app import system_message
-from langchain.prompts                import ChatPromptTemplate
-from langchain.chat_models            import ChatOpenAI
-from langchain.schema.output_parser   import StrOutputParser
+from langchain_core.prompts           import ChatPromptTemplate
+from langchain_google_vertexai        import ChatVertexAI
+from langchain_core.output_parsers    import StrOutputParser
 
 import os
 
@@ -14,11 +14,17 @@ def eval_expected_words(
     question,
     expected_words,
     human_template="{question}",
-    llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0),
+    llm=ChatVertexAI(project='plucky-agent-412507', 
+                     model_name="gemini-pro", convert_system_message_to_human=True, 
+                     temperature=0),
     output_parser=StrOutputParser()):
-
-  assistant = assistant_chain(system_message)
-  answer = assistant.invoke({"question": question})
+    
+  assistant = assistant_chain(
+      system_message,
+      human_template,
+      llm,
+      output_parser)    
+  answer = assistant.invoke({"question": question})    
   print(answer)
     
   assert any(word in answer.lower() \
@@ -31,7 +37,9 @@ def evaluate_refusal(
     question,
     decline_response,
     human_template="{question}", 
-    llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0),
+    llm=ChatVertexAI(project='plucky-agent-412507', 
+                     model_name="gemini-pro", convert_system_message_to_human=True, 
+                     temperature=0),
     output_parser=StrOutputParser()):
     
   assistant = assistant_chain(human_template, 
